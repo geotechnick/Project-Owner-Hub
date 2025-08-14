@@ -1,28 +1,34 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
 
-const app = express();
+// Add error handling
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
+const app = require('./src/app');
+
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
-app.use(express.json());
-
-// Test route
-app.get('/api/test', (req, res) => {
-  res.json({ 
-    message: 'Backend server is running!', 
-    timestamp: new Date(),
-    database: process.env.SUPABASE_URL ? 'Connected' : 'Not configured'
-  });
-});
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', service: 'Project Owner Hub API' });
-});
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Backend server running on http://localhost:${PORT}`);
   console.log(`📊 Database: ${process.env.SUPABASE_URL ? 'Connected' : 'Not configured'}`);
 });
+
+// Keep the server alive
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Server closed');
+  });
+});
+
+// Keep process alive
+setInterval(() => {
+  // Do nothing, just keep the event loop alive
+}, 30000);

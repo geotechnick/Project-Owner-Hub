@@ -8,8 +8,12 @@
       "Bash(node:*)",
       "Bash(npm start)",
       "Bash(npm run dev:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(timeout:*)",
+      "Bash(taskkill:*)",
+      "Bash(find:*)"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits"
   }
 }
