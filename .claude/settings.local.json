@@ -11,7 +11,8 @@
       "Bash(curl:*)",
       "Bash(timeout:*)",
       "Bash(taskkill:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:catalog.data.gov)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

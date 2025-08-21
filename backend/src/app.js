@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/projects');
 const grantRoutes = require('./routes/grants');
 const costRoutes = require('./routes/costs');
+const dataRoutes = require('./routes/data');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/grants', grantRoutes);
 app.use('/api/costs', costRoutes);
+app.use('/api/data', dataRoutes);
 console.log('Routes registered successfully');
 
 // Test route
